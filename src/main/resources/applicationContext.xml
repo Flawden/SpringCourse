@@ -18,7 +18,7 @@
     <bean id="ClassicalBean"
           class="ru.flawden.springcourse.Music.ClassicalMusic">
     </bean>
-    <bean id="MusicPlayer"
+    <bean id="MusicPlayer" scope="prototype"
         class="ru.flawden.springcourse.MusicPlayer">
         <property name="music">
             <list>
