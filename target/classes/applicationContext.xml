@@ -9,12 +9,24 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="MusicBean"
+    <bean id="HipHopBean"
           class="ru.flawden.springcourse.Music.HipHopMusic">
+    </bean>
+    <bean id="RockBean"
+          class="ru.flawden.springcourse.Music.RockMusic">
+    </bean>
+    <bean id="ClassicalBean"
+          class="ru.flawden.springcourse.Music.ClassicalMusic">
     </bean>
     <bean id="MusicPlayer"
         class="ru.flawden.springcourse.MusicPlayer">
-        <property name="music" ref="MusicBean"/>
+        <property name="music">
+            <list>
+                <ref bean="HipHopBean"/>
+                <ref bean="RockBean"/>
+                <ref bean="ClassicalBean"/>
+            </list>
+        </property>
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
