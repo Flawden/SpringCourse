@@ -10,5 +10,9 @@
     <bean id="MusicBean"
           class="ru.flawden.springcourse.Music.HipHopMusic">
     </bean>
+    <bean id="MusicPlayer"
+        class="ru.flawden.springcourse.MusicPlayer">
+        <constructor-arg ref="MusicBean"/>
+    </bean>
 
 </beans>
