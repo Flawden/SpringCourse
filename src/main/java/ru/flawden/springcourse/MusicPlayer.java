@@ -62,22 +62,25 @@ public class MusicPlayer {
 
     public void playMusic() {
         System.out.println(name);
-        music.forEach(music -> music.getSong().forEach(song -> System.out.println("Playing: " + song)));
+//        music.forEach(music -> music.getSong().forEach(song -> System.out.println("Playing: " + song)));
+        int length = music.size();
+        Music musiclist = music.get(rnd.nextInt(length));
+        length = musiclist.getSong().size();
+        System.out.println("Playing:" + musiclist.getSong().get(rnd.nextInt(length)));
         System.out.println("Volume: " + volume + "%");
     }
 
     public void playMusicByGenre(MusicGenres genre) throws BadGenreException {
         System.out.println(name);
-        int n = 0;
         if (genre == MusicGenres.CLASSICAL) {
-            int l = classicalMusic.getSong().size();
-            System.out.println("Playing: " + classicalMusic.getSong().get(rnd.nextInt(l)));
+            int length = classicalMusic.getSong().size();
+            System.out.println("Playing: " + classicalMusic.getSong().get(rnd.nextInt(length)));
         } else if (genre == MusicGenres.ROCK) {
-            int l = rockMusic.getSong().size();
-            System.out.println("Playing: " + rockMusic.getSong().get(rnd.nextInt(l)));
+            int length = rockMusic.getSong().size();
+            System.out.println("Playing: " + rockMusic.getSong().get(rnd.nextInt(length)));
         } else if (genre == MusicGenres.HIPHOP) {
-            int l = hipHopMusic.getSong().size();
-            System.out.println("Playing: " + hipHopMusic.getSong().get(rnd.nextInt(l)));
+            int length = hipHopMusic.getSong().size();
+            System.out.println("Playing: " + hipHopMusic.getSong().get(rnd.nextInt(length)));
         } else throw new BadGenreException("Error: non-existent genre of music");
 
         System.out.println("Volume: " + volume + "%");
