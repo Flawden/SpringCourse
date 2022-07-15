@@ -2,6 +2,8 @@ package ru.flawden.springcourse;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.flawden.springcourse.Music.Music;
+import ru.flawden.springcourse.Music.MusicGenres;
+import ru.flawden.springcourse.exception.BadGenreException;
 
 public class TestSpring {
     public static void main(String[] args) {
@@ -11,6 +13,11 @@ public class TestSpring {
         music.setName("Lavash");
         music.playMusic();
         music1.playMusic();
+        try {
+            music.playMusicByGenre(MusicGenres.ROCK);
+        } catch (BadGenreException e) {
+            System.out.println(e.getMessage());
+        }
         context.close();
     }
 }

@@ -1,19 +1,19 @@
 package ru.flawden.springcourse.Music;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ClassicalMusic implements Music {
 
-    public void init() {
-        System.out.println("List of classical music being created...");
-    }
-    public void destroy() {
-        System.out.println("Keeping the state of classical music, please wait...");
-    }
+    @Value("${musicList.classicalMusic}")
+    private String[] musics;
 
     @Override
-    public String getSong() {
-        return "Hungarian Rhapsody";
+    public List<String> getSong() {
+        return Arrays.asList(musics);
     }
 }
