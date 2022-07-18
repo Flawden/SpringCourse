@@ -18,14 +18,14 @@ public class FirstController {
     }
 
     @GetMapping("/welcome")
-    public String sayHello(HttpServletRequest request) {
-        System.out.println(request.getParameter("name"));
+    public String sayHello(HttpServletRequest request, Model model) {
+        model.addAttribute("name", request.getParameter("name"));
         return "first/hello";
     }
 
     @GetMapping("/welcome-alter")
-    public String sayHello(@RequestParam(required = false, name = "name") String name) {
-        System.out.println(name);
+    public String sayHello(@RequestParam(required = false, name = "name") String name, Model model) {
+        model.addAttribute("name", name);
         return "first/hello";
     }
 
