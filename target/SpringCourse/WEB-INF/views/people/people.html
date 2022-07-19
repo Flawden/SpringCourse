@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>People</title>
+</head>
+<body>
+
+<th:block th:each="person: ${people}">
+    <div>
+        <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="*{person.toString()}">Person</a>
+    </div>
+</th:block>
+
+</body>
+</html>
