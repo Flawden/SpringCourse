@@ -1,17 +1,14 @@
 package ru.flawden.springcourse.models;
 
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
-
 public class Person {
 
     private int id;
-    private String name;
+
+    private String firstname;
 
     private String surname;
+
+    private String email;
 
     public int getId() {
         return id;
@@ -19,14 +16,6 @@ public class Person {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSurname() {
@@ -37,16 +26,42 @@ public class Person {
         this.surname = surname;
     }
 
-    public Person(int id, String name, String surname) {
-        this.id = id;
-        this.name = name;
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Person() {}
+
+    public Person(String firstname, String surname, String email) {
+        this.firstname = firstname;
         this.surname = surname;
+        this.email = email;
+    }
+
+    public Person(int id, String firstname, String surname, String email) {
+        this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "Id: " + id + ", " +
-                "name: " + name + ", " +
-                "surname: " + surname + ".";
+                "name: " + firstname + ", " +
+                "surname: " + surname + ", " +
+                "email: " + email + ".";
     }
 }

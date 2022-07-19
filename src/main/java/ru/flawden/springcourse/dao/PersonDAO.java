@@ -13,10 +13,15 @@ public class PersonDAO {
     private List<Person> people;
     {
         people = new ArrayList<>();
-        people.add(new Person(++PEOPLE_COUNT, "Nick", "Tomson"));
-        people.add(new Person(++PEOPLE_COUNT, "Rick", "Sanchez"));
-        people.add(new Person(++PEOPLE_COUNT, "Brick", "Stone"));
-        people.add(new Person(++PEOPLE_COUNT, "Connor", "MaCGregor"));
+        people.add(new Person(++PEOPLE_COUNT, "Nick", "Tomson", "Nick@mail.ru"));
+        people.add(new Person(++PEOPLE_COUNT, "Rick", "Sanchez", "Rick@mail.ru"));
+        people.add(new Person(++PEOPLE_COUNT, "Brick", "Stone", "Brick@mail.ru"));
+        people.add(new Person(++PEOPLE_COUNT, "Connor", "MaCGregor", "Connor@mail.ru"));
+    }
+
+    public void createPerson(Person person) {
+        person.setId(++PEOPLE_COUNT);
+        people.add(person);
     }
 
     public Person person(int id) {
