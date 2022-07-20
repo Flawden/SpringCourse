@@ -13,7 +13,7 @@ public class Person {
     private String surname;
     @NotEmpty(message = "Email shouldn't be empty")
     @Email(message = "Email shoild be valid")
-    @Size(min = 2, max = 15, message = "Name shoild be between 2 and 15 characters")
+    @Size(min = 2, max = 50, message = "Name shoild be between 2 and 50 characters")
     private String email;
     @Min(value = 0, message = "User must be alive")
     @Max(value = 150, message = "User must be still alive")

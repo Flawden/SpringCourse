@@ -6,6 +6,7 @@
 </head>
 <body>
 <p th:text="${person}">People</p>
+<a th:href="@{/people/}">Back to people list</a> <br>
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a> <br><br>
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
     <input type="submit" value="Delete"/>
