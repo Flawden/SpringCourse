@@ -8,12 +8,18 @@
     <form th:action="@{/people}" th:method="POST" th:object="${person}">
         <h1>Registration</h1>
             <label for="firstname">Name</label><br>
-            <input type="text" th:field="*{firstname}" id="firstname" value=""><br>
-            <label for="lastname">Surname</label><br>
-            <input type="text" th:field="*{surname}" id="lastname" value=""><br>
+            <input type="text" th:field="*{firstname}" id="firstname" value="">
+            <div style="color: red" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error's name</div><br>
+            <label for="surname">Surname</label><br>
+            <input type="text" th:field="*{surname}" id="surname" value="">
+            <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Error's name</div><br>
+            <label for="age">Age</label><br>
+            <input type="text" th:field="*{age}" id="age" value="">
+            <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error's name</div><br>
             <label for="email">Email</label><br>
-            <input type="email" th:field="*{email}" id="email" value=""><br><br>
-            <button type="submit">Sign up</button>
+            <input type="email" th:field="*{email}" id="email" value="">
+            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error's name</div><br><br>
+            <input type="submit" value="Sign up"/>
     </form>
 </body>
 </html>

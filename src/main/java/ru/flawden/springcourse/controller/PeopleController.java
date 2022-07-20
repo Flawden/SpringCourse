@@ -2,9 +2,12 @@ package ru.flawden.springcourse.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.flawden.springcourse.dao.PersonDAO;
 import ru.flawden.springcourse.models.Person;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")
@@ -29,7 +32,7 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    private String updatePerson(@ModelAttribute("person") Person person, @PathVariable("id") Integer id) {
+    private String updatePerson(@ModelAttribute("person") @Valid Person person, @PathVariable("id") Integer id) {
         personDAO.updatePerson(person, id);
         return "redirect:/people";
     }
@@ -46,7 +49,10 @@ public class PeopleController {
     }
 
     @PostMapping()
-    private String createPerson(@ModelAttribute Person person) {
+    private String createPerson(@ModelAttribute @Valid Person person, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/people/new_person";
+        }
         personDAO.createPerson(person);
         return "redirect:/people";
     }
