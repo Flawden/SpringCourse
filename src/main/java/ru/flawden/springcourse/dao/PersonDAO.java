@@ -31,10 +31,12 @@ public class PersonDAO {
 
     public void createPerson(Person person) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Person(firstname, surname, age, email) VALUES('" + person.getFirstname() +
-                    "', '" + person.getSurname() + "', " + person.getAge() + ", '" + person.getEmail() + "')";
-            statement.executeUpdate(SQL);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO Person(firstname, surname, age, email) VALUES(?, ?, ?, ?)");
+            statement.setString(1, person.getFirstname());
+            statement.setString(2, person.getSurname());
+            statement.setInt(3, person.getAge());
+            statement.setString(4, person.getEmail());
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -42,9 +44,9 @@ public class PersonDAO {
 
     public Person show(int id) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM Person WHERE id = " + id;
-            ResultSet resultSet = statement.executeQuery(SQL);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()) {
                 Person person = new Person();
                 person.setId(resultSet.getInt("id"));
@@ -63,9 +65,8 @@ public class PersonDAO {
     public List<Person> peopleList() {
         List<Person> people = new ArrayList<>();
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM Person";
-            ResultSet resultSet = statement.executeQuery(SQL);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person");
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Person person = new Person();
                 person.setId(resultSet.getInt("id"));
@@ -89,14 +90,18 @@ public class PersonDAO {
         personToBeUpdated.setSurname(person.getSurname());
         personToBeUpdated.setAge(person.getAge());
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "UPDATE Person SET " +
-                    "firstname = '" + personToBeUpdated.getFirstname() + "', " +
-                    "surname = '" + personToBeUpdated.getSurname() + "', " +
-                    "age = " + personToBeUpdated.getAge() + ", " +
-                    "email = '" + personToBeUpdated.getEmail() + "' " +
-                    "WHERE id = " + id;
-            statement.executeUpdate(SQL);
+            PreparedStatement statement = connection.prepareStatement("UPDATE Person " +
+                    "SET firstname = ?," +
+                    "surname = ?," +
+                    "age = ?," +
+                    "email = ?" +
+                    "WHERE id = ?");
+            statement.setString(1, personToBeUpdated.getFirstname());
+            statement.setString(2, personToBeUpdated.getSurname());
+            statement.setInt(3, personToBeUpdated.getAge());
+            statement.setString(4, personToBeUpdated.getEmail());
+            statement.setInt(5, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -104,9 +109,9 @@ public class PersonDAO {
 
     public void delete(int id) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "DELETE FROM Person WHERE id = " + id;
-            statement.executeUpdate(SQL);
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM Person WHERE id = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
