@@ -5,8 +5,9 @@
     <title>Person</title>
 </head>
 <body>
-
-<p th:text="${people}">People</p>
-
+<p th:text="${person}">People</p>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
 </body>
 </html>

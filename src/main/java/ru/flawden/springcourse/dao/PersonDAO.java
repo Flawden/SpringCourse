@@ -24,7 +24,7 @@ public class PersonDAO {
         people.add(person);
     }
 
-    public Person person(int id) {
+    public Person show(int id) {
         return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
     }
 
@@ -32,4 +32,14 @@ public class PersonDAO {
         return people;
     }
 
+    public void updatePerson(Person person, Integer id) {
+        Person personToBeUpdated = show(id);
+        personToBeUpdated.setEmail(person.getEmail());
+        personToBeUpdated.setFirstname(person.getFirstname());
+        personToBeUpdated.setSurname(person.getSurname());
+    }
+
+    public void delete(int id) {
+        people.removeIf(p -> p.getId() == id);
+    }
 }
