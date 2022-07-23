@@ -7,15 +7,19 @@
 <body>
     <form th:method="PATCH" th:object="${person}" th:action="@{/people/{id}(id=${person.getId()})}">
         <h1>Edit</h1>
-            <label for="firstname">Name</label><br>
-            <input type="text" th:field="*{firstname}" id="firstname" value=""><br>
-            <label for="surname">Surname</label><br>
-            <input type="text" th:field="*{surname}" id="surname" value=""><br>
-            <label for="age">Age</label><br>
-            <input type="text" th:field="*{age}" id="age" value=""><br>
-            <label for="email">Email</label><br>
-            <input type="email" th:field="*{email}" id="email" value=""><br><br>
-            <input type="submit" value="Update"/>
+        <label for="firstname">Name</label><br>
+        <input type="text" th:field="*{firstname}" id="firstname" value="">
+        <div style="color: red" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error's name</div><br>
+        <label for="surname">Surname</label><br>
+        <input type="text" th:field="*{surname}" id="surname" value="">
+        <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Error's name</div><br>
+        <label for="age">Age</label><br>
+        <input type="text" th:field="*{age}" id="age" value="">
+        <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error's name</div><br>
+        <label for="email">Email</label><br>
+        <input type="email" th:field="*{email}" id="email" value="">
+        <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error's name</div><br><br>
+        <input type="submit" value="Edit"/>
     </form>
 </body>
 </html>
