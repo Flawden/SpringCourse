@@ -22,46 +22,46 @@ public class PeopleController {
         this.personValidator = personValidator;
     }
 
-    @GetMapping({"/{id}"})
-    private String person(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("person", personDAO.show(id));
-        return "/people/person";
-    }
-
-    @GetMapping({"/{id}/edit"})
-    private String edit(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("person", personDAO.show(id));
-        return "/people/edit";
-    }
-
-    @PatchMapping("/{id}")
-    private String updatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") Integer id) {
-        personValidator.validate(person, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "/people/edit";
-        }
-        personDAO.updatePerson(person, id);
-        return "redirect:/people";
-    }
-
     @GetMapping()
-    private String peopleList(Model model) {
-        model.addAttribute("people", personDAO.peopleList());
+    private String showAllPeople(Model model) {
+        model.addAttribute("people", personDAO.showAllPeople());
         return "/people/people";
     }
 
     @GetMapping("/new")
-    private String registration(@ModelAttribute("person") Person person) {
+    private String showCreatePage(@ModelAttribute("person") Person person) {
         return "/people/new_person";
     }
 
     @PostMapping()
-    private String createPerson(@ModelAttribute @Valid Person person, BindingResult bindingResult) {
+    private String create(@ModelAttribute @Valid Person person, BindingResult bindingResult) {
         personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/people/new_person";
         }
-        personDAO.createPerson(person);
+        personDAO.create(person);
+        return "redirect:/people";
+    }
+
+    @GetMapping({"/{id}"})
+    private String show(@PathVariable("id") Integer personId, Model model) {
+        model.addAttribute("person", personDAO.show(personId));
+        return "/people/person";
+    }
+
+    @GetMapping({"/{id}/edit"})
+    private String edit(@PathVariable("id") Integer personId, Model model) {
+        model.addAttribute("person", personDAO.show(personId));
+        return "/people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    private String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult, @PathVariable("id") Integer personId) {
+        personValidator.validate(person, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "/people/edit";
+        }
+        personDAO.updatePerson(person, personId);
         return "redirect:/people";
     }
 

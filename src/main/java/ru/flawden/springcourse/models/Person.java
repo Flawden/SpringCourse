@@ -19,6 +19,10 @@ public class Person {
     @Max(value = 150, message = "User must be still alive")
     private int age;
 
+    @NotEmpty(message = "Address shouldn't be empty")
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Your address should by in this format: Country, City, Postal code (6 digital)")
+    private String address;
+
     public int getId() {
         return id;
     }
@@ -59,21 +63,31 @@ public class Person {
         this.age = age;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Person() {}
 
-    public Person(String firstname, String surname, String email, int age) {
+    public Person(String firstname, String surname, String email, int age, String address) {
         this.firstname = firstname;
         this.surname = surname;
         this.email = email;
         this.age = age;
+        this.address = address;
     }
 
-    public Person(int id, String firstname, String surname, String email, int age) {
+    public Person(int id, String firstname, String surname, String email, int age, String address) {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;
         this.email = email;
         this.age = age;
+        this.address = address;
     }
 
     @Override
@@ -82,6 +96,7 @@ public class Person {
                 "name: " + firstname + ", " +
                 "surname: " + surname + ", " +
                 "age: " + age + ", " +
-                "email: " + email + ".";
+                "email: " + email + "," +
+                "address: " + address + ".";
     }
 }
